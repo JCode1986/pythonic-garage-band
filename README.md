@@ -12,4 +12,4 @@ Use Python classes to model a Band made up of different kinds of musicians. Star
 ## Change Log
 
 12-05-2019 3:00pm - Initial commit
-12-05-2019 3:30pm -
+12-05-2019 3:41pm - Scaffolding and Readme updated
