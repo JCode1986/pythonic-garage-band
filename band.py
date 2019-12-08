@@ -3,7 +3,7 @@
 class Band:
     all_bands = []
 
-    def __init__(self, name, musicians):
+    def __init__(self, name, musicians = None):
         self.name = name
         self.members = musicians
         self.__class__.all_bands.append(self)
@@ -13,6 +13,14 @@ class Band:
 
     def play_solos(self):
         pass
+
+    @staticmethod
+    def assemble_band():
+        return 'let\'s get this party started!'
+
+    @classmethod
+    def get_bands(cls):
+        return cls.all_bands
 
 class Musician:
     def __init__(self, name):
@@ -84,7 +92,7 @@ class Drummer(Musician):
         return f'I am {self.name}, and I shred on the {self.get_instrument()}'
 
     def get_instrument(self):
-        return 'Drummer'
+        return 'Drums'
 
     def play_solo(self):
         return '*badum ch*'
@@ -105,5 +113,8 @@ if __name__ == '__main__':
     bob = Drummer('Bob')
 
     band_one = Band('Python shredders', [joe, duke, leah])
+    assert len(band_one.members) == 3, 'band_one should be 3 members'
     band_two = Band('Generic Band', bob)
     print(band_one)
+    assert len(Band.all_bands) == 2, 'should be 2'
+    print(Band.get_bands())
