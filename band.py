@@ -10,10 +10,7 @@ class Band:
 
     def __repr__(self):
         return f'The Band\'s name is {self.name}, and the members are {self.members}'
-
-    def play_solos(self):
-        pass
-
+    
     @staticmethod
     def assemble_band():
         return 'let\'s get this party started!'
@@ -22,7 +19,7 @@ class Band:
     def get_bands(cls):
         return cls.all_bands
 
-class Musician:
+class Musician(Band):
     def __init__(self, name):
         self.name = name
 
@@ -32,12 +29,12 @@ class Musician:
     def __repr__(self):
         return f'Musician: {self.name}'
 
-#asks each member musician to play a solo, in the order they were added to band.
-    @classmethod
-    def play_solos(cls):
-        pass
+    def get_instrument(self):
+        return self.__class__.instrument_of_choice
 
-# should return a list of previously created Band instances
+    def play_solo(self):
+        return self.__class__.solo_performance
+
     @classmethod
     def to_list(cls):
         pass
@@ -47,6 +44,9 @@ class Musician:
         pass
 
 class Guitarist(Musician):
+    instrument_of_choice = 'Guitar'
+    solo_performance = '*shreds guitar with pick*'
+
     def __init__(self, name):
         super().__init__(name)
         self.name = name
@@ -55,15 +55,12 @@ class Guitarist(Musician):
         return f'Guitarist: {self.name}'
 
     def __str__(self):
-        return f'I am {self.name}, and I shred on the {self.get_instrument()}'
-
-    def get_instrument(self):
-        return 'Guitar'
-
-    def play_solo(self):
-        return '*shreds guitar with pick*'
+        return f'I am {self.name}, and I shred on the {self.__class__.instrument_of_choice}'
 
 class Bassist(Musician):
+    instrument_of_choice = 'Bass'
+    solo_performance = '*slaps bass*'
+
     def __init__(self, name):
         super().__init__(name)
         self.name = name
@@ -72,15 +69,12 @@ class Bassist(Musician):
         return f'Bassist: {self.name}'
 
     def __str__(self):
-        return f'I am {self.name}, and I shred on the {self.get_instrument()}'
-
-    def get_instrument(self):
-        return 'Bass'
-
-    def play_solo(self):
-        return '*slaps bass*'
+        return f'I am {self.name}, and I shred on the {self.__class__.instrument_of_choice}'
 
 class Drummer(Musician):
+    instrument_of_choice = 'Drummer'
+    solo_performance = '*badum ch*'
+
     def __init__(self, name):
         super().__init__(name)
         self.name = name
@@ -89,26 +83,17 @@ class Drummer(Musician):
         return f'Drummer: {self.name}'
 
     def __str__(self):
-        return f'I am {self.name}, and I shred on the {self.get_instrument()}'
-
-    def get_instrument(self):
-        return 'Drums'
-
-    def play_solo(self):
-        return '*badum ch*'
+        return f'I am {self.name}, and I shred on the {self.__class__.instrument_of_choice}'
 
 if __name__ == '__main__':
     joe = Guitarist('Joe')
     print(joe)
-    print(joe.play_solo())
 
     duke = Bassist('Duke')
     print(duke)
-    print(duke.play_solo())
 
     leah = Drummer('Leah')
     print(leah)
-    print(leah.play_solo())
 
     bob = Drummer('Bob')
 
@@ -118,3 +103,4 @@ if __name__ == '__main__':
     print(band_one)
     assert len(Band.all_bands) == 2, 'should be 2'
     print(Band.get_bands())
+    print(Band.play_solos())

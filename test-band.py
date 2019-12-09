@@ -1,10 +1,12 @@
 from band import Band, Musician, Guitarist, Bassist, Drummer
-# , Musician, Guitarist, Bassist, Drummer
 import pytest
 
 band_one = Band('Python Band', [Bassist('Curly Noproblem')])
 band_two = Band('Typescript Band', [Drummer('Stricto Mcgee')])
 band_three = Band('Javasciptt Band', [Guitarist('Loosey Whatever')])
+jon = Guitarist('Jon Snow')
+cersei = Bassist('Cersei')
+little_finger = Drummer('Little Finger')
 
 def test_band_instance_string_attr():
     """
@@ -18,7 +20,7 @@ def test_members_attribute_from_band():
     """
     A Band instance should have a members attribute which is a list of instances that inherit from Musician base (or super) class.
     """
-    # expected = [Drummer: Stricto Mcgee]
+    # expected = ['Drummer: Stricto Mcgee']
     # actual = band_two.members
     # assert expected == actual
     pass
@@ -58,29 +60,21 @@ def test_musician_str_and_repr():
     """
     Each kind of Musician instance should have appropriate __str__ and __repr__ methods.
     """
-    # expected = 'Guitarist: foo'
-    # actual = Guitarist('foo')
-    # print(type(actual))
-    # assert actual == expected
-    pass
+    daenerys = Musician('Daenerys')
+    assert isinstance(daenerys, Musician)
 
 def test_get_instrument():
     """
     Each kind of Musician instance should have a get_instrument method that returns string.
     """
-    jon = Guitarist('Jon Snow')
-    cersei = Bassist('Cersei')
-    little_finger = Drummer('Little Finger')
-    band_lst = [jon.get_instrument(), cersei.get_instrument(), little_finger.get_instrument()]
-    actual = jon.get_instrument()
-    expected = 'Guitar'
+    actual = [jon.get_instrument(), cersei.get_instrument(), little_finger.get_instrument()]
+    expected = ['Guitar', 'Bass', 'Drummer']
     assert actual == expected
 
-# def test_musician_solo():
-#     """
-#     Each kind of Musician instance should have a play_solo method that returns string.
-#     """
-#     
-#     
-
-
+def test_musician_solo():
+    """
+    Each kind of Musician instance should have a play_solo method that returns string.
+    """
+    actual = [jon.play_solo(), cersei.play_solo(), little_finger.play_solo()]
+    expected = ['*shreds guitar with pick*', '*slaps bass*', '*badum ch*']
+    assert actual == expected
